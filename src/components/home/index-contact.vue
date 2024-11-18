@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-light p-5">
+  <section id="contact_Us" class="bg-light p-5">
     <div class="container-fluid">
       <div class="text-center">
         <h1>ارتباط با ما</h1>

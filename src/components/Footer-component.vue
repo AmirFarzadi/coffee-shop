@@ -4,7 +4,7 @@
       <h1 class="display-3">
         <a href="" class="navbar-brand text-success ms-3">
           <img
-            src="../../img/logo.png"
+            src="../img/logo.png"
             alt=""
             class="img-fluid"
             style="width: 100px"

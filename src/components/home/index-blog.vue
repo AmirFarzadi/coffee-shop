@@ -1,11 +1,14 @@
 <template>
-  <section class="p-5" style="background-color: #5d4037">
+  <section id="blog" class="p-5" style="background-color: #5d4037">
     <div class="contqainer-fluid">
       <h1 class="text-center text-light mb-5">مقالات</h1>
       <div class="row">
-        <div class="col-lg-3 col-md-6 mb-5 px-5">
+        <div class="col-lg-3 col-md-6 mb-5 px-2">
           <div class="card">
-            <img src="../../img/blog.jpg" alt="" class="card-img-top" />
+            <figure class="w-100 overflow-y-hidden" style="height: 168px">
+              <img src="../../img/blog.jpg" alt="" class="card-img-top w-100" />
+            </figure>
+
             <div class="card-body">
               <div class="card-title">
                 <h3 class="text-secondary">لورم ایپسوم متن</h3>
@@ -45,9 +48,12 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-3 col-md-6 mb-5 px-5">
+        <div class="col-lg-3 col-md-6 mb-5 px-2">
           <div class="card">
-            <img src="../../img/blog.jpg" alt="" class="card-img-top" />
+            <figure class="w-100 overflow-y-hidden" style="height: 168px">
+              <img src="../../img/blog.jpg" alt="" class="card-img-top w-100" />
+            </figure>
+
             <div class="card-body">
               <div class="card-title">
                 <h3 class="text-secondary">لورم ایپسوم متن</h3>
@@ -87,9 +93,12 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-3 col-md-6 mb-5 px-5">
+        <div class="col-lg-3 col-md-6 mb-5 px-2">
           <div class="card">
-            <img src="../../img/blog.jpg" alt="" class="card-img-top" />
+            <figure class="w-100 overflow-y-hidden" style="height: 168px">
+              <img src="../../img/blog.jpg" alt="" class="card-img-top w-100" />
+            </figure>
+
             <div class="card-body">
               <div class="card-title">
                 <h3 class="text-secondary">لورم ایپسوم متن</h3>
@@ -129,9 +138,12 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-3 col-md-6 mb-5 px-5">
+        <div class="col-lg-3 col-md-6 mb-5 px-2">
           <div class="card">
-            <img src="../../img/blog.jpg" alt="" class="card-img-top" />
+            <figure class="w-100 overflow-y-hidden" style="height: 168px">
+              <img src="../../img/blog.jpg" alt="" class="card-img-top w-100" />
+            </figure>
+
             <div class="card-body">
               <div class="card-title">
                 <h3 class="text-secondary">لورم ایپسوم متن</h3>
@@ -169,6 +181,19 @@
                 </a>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="row justify-content-center">
+          <div class="col-3 text-center">
+            <router-link
+              :to="{ name: 'blog' }"
+              class="btn btn-outline-light w-100 d-flex align-items-center justify-content-center"
+            >
+              موارد بیشتر
+              <i class="fa-solid fa-arrow-left"></i>
+            </router-link>
           </div>
         </div>
       </div>
