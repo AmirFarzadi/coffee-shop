@@ -76,4 +76,5 @@ const route = useRoute();
 onMounted(() => {
   route.path == "/" ? (homePage.value = true) : (homePage.value = false);
 });
+
 </script>

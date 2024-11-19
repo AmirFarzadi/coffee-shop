@@ -64,15 +64,15 @@
             </div>
           </div>
           <!-- Products -->
-            <div id="products" class="row g-1">
+            <div id="products" class="row g-1 align-items-stretch">
               <!-- Product Card -->
                  <div class="col-lg-3 col-sm-6 col-12" v-for="product in products" :key="product.id">
-                  <router-link :to="{name: 'product-information', params : {name : product.route}}" class="text-decoration-none">
-                    <div class="card p-3 rounded-3">
-                      <img src="../../img/coffee.jpg" class="card-img-top" alt="" />
-                      <div class="card-body text-center">
-                        <h6 class="card-title mb-3">{{ product.name }}</h6>
-                        <p class="card-text text-success">{{ product.price }}</p>
+                  <router-link :to="{name: 'product-information', params : {name : product.route}}" class="text-decoration-none d-block h-100">
+                    <div class="card p-3 rounded-3 h-100 d-flex flex-column">
+                      <img src="../../img/coffee.jpg" class="card-img-top mb-3 object-fit-cover" alt="" />
+                      <div class="card-body text-center p-0 mt-auto">
+                        <h6 class="card-title mb-2 text-truncate" style="max-width: 100%;">{{ product.name }}</h6>
+                        <p class="card-text text-success fw-bold">{{ product.price }} تومان</p>
                       </div>
                     </div>
                   </router-link>
