@@ -113,20 +113,4 @@ const product_number = ref(1)
 </script>
 
 <style>
-/* Custom Styles for Responsive Design */
-/* Ensure proper spacing and alignment on smaller screens */
-/* @media (max-width: 768px) {
-  #product-title h3 {
-    font-size: 1.2rem;
-  }
-  #product-price h4 {
-    font-size: 1.1rem;
-  }
-  #social-links i {
-    font-size: 1.2rem;
-  }
-  #add-to-cart button {
-    font-size: 0.9rem;
-  }
-} */
 </style>

@@ -1,7 +1,7 @@
 
 <template>
-  <section style="background-color: #f0f0f0">
-    <div class="container-fluid py-4">
+  <section>
+    <div class="container-fluid py-5" style="background-color: #f0f0f0">
       <div class="row justify-content-center align-items-start">
 
         <!-- Topbar -->
@@ -64,7 +64,7 @@
             </div>
           </div>
           <!-- Products -->
-            <div id="products" class="row g-1 align-items-stretch">
+            <div id="products" class="row g-2 align-items-stretch">
               <!-- Product Card -->
                  <div class="col-lg-3 col-sm-6 col-12" v-for="product in products" :key="product.id">
                   <router-link :to="{name: 'product-information', params : {name : product.route}}" class="text-decoration-none d-block h-100">
@@ -89,5 +89,4 @@
 
 <script setup>
 import products from '@/data';
-console.log(products);
 </script>

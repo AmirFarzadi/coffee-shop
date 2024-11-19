@@ -33,11 +33,10 @@
         </li>
         <li class="nav-item mx-2">
           <a href="#blog" class="nav-link" v-if="homePage" >مقالات</a>
-          <router-link :to="{name : 'blog'}" class="nav-link" v-else>مقالات</router-link>
+          <router-link :to="{name : 'blogs'}" class="nav-link" v-else>مقالات</router-link>
         </li>
         <li class="nav-item mx-2">
-          <a href="#contact_Us" class="nav-link" v-if="homePage">ارتباط باما</a>
-          <router-link to="/#contact_Us" class="nav-link" v-else>ارتباط باما</router-link>
+          <a href="#contact_Us" class="nav-link" ref="contactUs" @click="contactUsHandeler">ارتباط باما</a>
         </li>
       </ul>
 

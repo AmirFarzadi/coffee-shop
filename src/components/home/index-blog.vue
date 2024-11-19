@@ -186,9 +186,9 @@
       </div>
       <div class="row justify-content-center">
         <div class="row justify-content-center">
-          <div class="col-3 text-center">
+          <div class="col-auto text-center">
             <router-link
-              :to="{ name: 'blog' }"
+              :to="{ name: 'blogs' }"
               class="btn btn-outline-light w-100 d-flex align-items-center justify-content-center"
             >
               موارد بیشتر
@@ -200,3 +200,9 @@
     </div>
   </section>
 </template>
+
+
+
+<script setup>
+
+</script>
