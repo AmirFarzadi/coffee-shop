@@ -106,9 +106,30 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import axios from 'axios';
+import { onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router';
 
 const product_number = ref(1)
+const route = useRoute()
+
+onMounted(() => {
+  const productSlug = route.params.slug
+  axios
+    .get(`http://localhost:3000/api/product/${productSlug}`)
+    .then(function (response) {
+      // handle success
+      console.log(response.data)
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+    .finally(function () {
+      // always executed
+    });
+})
+
 
 </script>
 

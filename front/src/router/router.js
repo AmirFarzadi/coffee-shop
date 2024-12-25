@@ -22,12 +22,12 @@ const routes = [
         name: "products",
         component: ProductsSection,
       },
-      {
-        path: ":name", // مسیر پویا برای محصول خاص
-        name: "product-information",
-        component: ProductInformationPage,
-      },
     ],
+  },
+  {
+    path: "/product/:slug",
+    name: "product-information",
+    component: ProductInformationPage,
   },
   {
     path: "/blog",

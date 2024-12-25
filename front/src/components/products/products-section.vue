@@ -3,21 +3,31 @@
   <section>
     <div class="container-fluid py-5" style="background-color: #f0f0f0">
       <div class="row justify-content-center align-items-start">
-
         <!-- Topbar -->
-        <div class="col-11 d-md-none mb-3 px-3 py-2 d-flex align-items-center justify-content-between bg-light rounded-3 shadow">
+        <div
+          class="col-11 d-md-none mb-3 px-3 py-2 d-flex align-items-center justify-content-between bg-light rounded-3 shadow"
+        >
           <div class="dropdown">
-              <button class="btn btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                دسته بندی محصولات
-              </button>
-              <ul class="dropdown-menu">
-                <li><a href="#" class="dropdown-item">قهوه</a></li>
-              </ul>
+            <button
+              class="btn btn-sm dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              دسته بندی محصولات
+            </button>
+            <ul class="dropdown-menu">
+              <li><a href="#" class="dropdown-item">قهوه</a></li>
+            </ul>
           </div>
           <div>
             <form>
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="جستجو محصولات..." />
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="جستجو محصولات..."
+                />
                 <button class="btn btn-success" type="submit">
                   <i class="bi bi-search"></i>
                 </button>
@@ -26,12 +36,19 @@
           </div>
         </div>
         <!-- Sidebar -->
-        <div id="sidebar" class="col-lg-3 col-md-4 col-12 d-none d-md-block p-4 me-4 bg-light rounded-3 shadow">
+        <div
+          id="sidebar"
+          class="col-lg-3 col-md-4 col-12 d-none d-md-block p-4 me-4 bg-light rounded-3 shadow"
+        >
           <div class="mb-4">
             <h5 class="mb-3">جستجو</h5>
             <form>
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="جستجو محصولات..." />
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="جستجو محصولات..."
+                />
                 <button class="btn btn-success" type="submit">
                   <i class="bi bi-search"></i>
                 </button>
@@ -41,18 +58,42 @@
 
           <div>
             <h5 class="mb-3">دسته بندی محصولات</h5>
-            <ul class="list-group">
-              <li class="list-group-item"><a href="#" class="text-decoration-none text-dark">قهوه</a></li>
+            <ul
+              class="list-group"
+              v-for="category in productCategories"
+              :key="category.category_id"
+            >
+              <router-link
+                :to="{ name: 'products', query: { category: category.slug } }"
+                class="text-decoration-none"
+              >
+                <li
+                  class="list-group-item"
+                  @click="categoryHandeler(category.slug)"
+                >
+                  <a class="text-decoration-none text-dark"
+                    >{{ category.name }}
+                  </a>
+                </li>
+              </router-link>
             </ul>
           </div>
         </div>
 
         <!-- Product Container -->
-        <div id="product-container" class="col-lg-8 col-md-7 col-12 p-4 bg-light rounded-3 shadow">
+        <div
+          id="product-container"
+          class="col-lg-8 col-md-7 col-12 p-4 bg-light rounded-3 shadow"
+        >
           <!-- Product Filter -->
           <div id="product-filter" class="mb-4">
             <div class="dropend">
-              <button class="btn btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <button
+                class="btn btn-sm dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
                 ترتیب محصولات
               </button>
               <ul class="dropdown-menu">
@@ -64,22 +105,41 @@
             </div>
           </div>
           <!-- Products -->
-            <div id="products" class="row g-2 align-items-stretch">
-              <!-- Product Card -->
-                 <div class="col-lg-3 col-sm-6 col-12" v-for="product in products" :key="product.id">
-                  <router-link :to="{name: 'product-information', params : {name : product.route}}" class="text-decoration-none d-block h-100">
-                    <div class="card p-3 rounded-3 h-100 d-flex flex-column">
-                      <img src="../../img/coffee.jpg" class="card-img-top mb-3 object-fit-cover" alt="" />
-                      <div class="card-body text-center p-0 mt-auto">
-                        <h6 class="card-title mb-2 text-truncate" style="max-width: 100%;">{{ product.name }}</h6>
-                        <p class="card-text text-success fw-bold">{{ product.price }} تومان</p>
-                      </div>
-                    </div>
-                  </router-link>
-                 </div>
-            <!-- Repeat product cards as needed -->
-
-            <!-- Add more product cards as needed -->
+          <div id="products" class="row g-2 align-items-stretch">
+            <!-- Product Card -->
+            <div
+              class="col-lg-3 col-sm-6 col-12"
+              v-for="product in products"
+              :key="product.product_id"
+              @click="productCartHandeler(product.product_id)"
+            >
+              <router-link
+                :to="{
+                  name: 'product-information',
+                  params: { slug: product.slug },
+                }"
+                class="text-decoration-none"
+              >
+                <div class="card p-3 rounded-3 h-100 d-flex flex-column">
+                  <img
+                    src="../../img/coffee.jpg"
+                    class="card-img-top mb-3 object-fit-cover"
+                    alt=""
+                  />
+                  <div class="card-body text-center p-0 mt-auto">
+                    <h6
+                      class="card-title mb-2 text-truncate"
+                      style="max-width: 100%"
+                    >
+                      {{ product.title }}
+                    </h6>
+                    <p class="card-text text-success fw-bold">
+                      {{ Number(product.price).toLocaleString() }} تومان
+                    </p>
+                  </div>
+                </div>
+              </router-link>
+            </div>
           </div>
         </div>
       </div>
@@ -88,5 +148,69 @@
 </template>
 
 <script setup>
-import products from '@/data';
+const axios = require("axios");
+import { onMounted, ref } from "vue";
+import { useRoute } from "vue-router";
+const products = ref(null);
+const productCategories = ref(null);
+
+const route = useRoute();
+
+onMounted(() => {
+  const categorySlug = route.query.category;
+  if (categorySlug) {
+    categoryHandeler(categorySlug);
+  } else {
+    categoryHandeler();
+  }
+  loadCategories();
+});
+
+// function loadProducts() {
+//   axios
+//     .get("http://localhost:3000/api/products")
+//     .then(function (response) {
+//       // handle success
+//       products.value = response.data;
+//     })
+//     .catch(function (error) {
+//       // handle error
+//       console.log(error);
+//     })
+//     .finally(function () {
+//       // always executed
+//     });
+// }
+
+function categoryHandeler(categorySlug) {
+  axios
+    .get(`http://localhost:3000/api/products?category=${categorySlug}`)
+    .then(function (response) {
+      // handle success
+      products.value = response.data;
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+    .finally(function () {
+      // always executed
+    });
+}
+
+function loadCategories() {
+  axios
+    .get("http://localhost:3000/api/categories")
+    .then(function (response) {
+      // handle success
+      productCategories.value = response.data;
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+    .finally(function () {
+      // always executed
+    });
+}
 </script>
