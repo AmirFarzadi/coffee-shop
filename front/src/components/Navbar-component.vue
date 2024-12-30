@@ -26,7 +26,11 @@
             >صفحه اصلی</router-link
           >
         </li>
-        <router-link :to="{ name: 'products' }" class="nav-link">
+        <router-link
+          :to="{ name: 'products' }"
+          class="nav-link"
+          @click="productsStore.setProducts(null)"
+        >
           <li class="nav-item mx-2">محصولات</li>
         </router-link>
         <li class="nav-item mx-2">
@@ -232,9 +236,11 @@
 // const axios = require('axios');
 import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
-
 const homePage = ref(false);
 const route = useRoute();
+import { useProductsStore } from "@/store/products";
+const productsStore = useProductsStore();
+
 onMounted(() => {
   route.path == "/" ? (homePage.value = true) : (homePage.value = false);
 });

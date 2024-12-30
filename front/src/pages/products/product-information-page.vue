@@ -8,7 +8,11 @@
           class="col-md-4 col-12 d-flex align-items-center justify-content-center px-4 mb-3 mb-md-0"
         >
           <div id="product-image">
-            <img src="../../img/coffee.jpg" alt="Coffee" class="img-fluid border" />
+            <img
+              src="../../img/coffee.jpg"
+              alt="Coffee"
+              class="img-fluid border"
+            />
           </div>
         </div>
 
@@ -16,10 +20,11 @@
         <div class="col-md-8 col-12 border-start border-2">
           <!-- Product Name Section -->
           <div class="row">
-            <div class="col-12 border-bottom ">
+            <!-- {{ product.title}} -->
+            <div class="col-12 border-bottom">
               <div id="product-title" class="d-flex align-items-center">
                 <i class="bi bi-caret-left-fill"></i>
-                <h3 class="ms-1">قهوه استارباکس گلد</h3>
+                <h3 class="ms-1">{{ product.title }}</h3>
               </div>
             </div>
           </div>
@@ -29,15 +34,19 @@
             <!-- Left Side: Price and Details -->
             <div class="col-12 col-md-6 p-3">
               <div id="product-price" class="py-2">
-                <h4 class="text-success">1230000 تومان</h4>
+                <h4 class="text-success">{{ Number(product.price).toLocaleString() }} تومان</h4>
               </div>
               <div id="product-info">
-                <p>نام: <span>قهوه استارباکس گلد (1kg)</span></p>
-                <p>نام انگلیسی: <span>Espresso Barista Gran Crema Beans</span></p>
-                <p>وزن: <span>1 کیلوگرم</span></p>
-                <p>نوع رست: <span>مدیوم</span></p>
-                <p>میزان کافئین: <span>متوسط</span></p>
-                <p class="text-success" style="font-size: 13px;">موجود در انبار</p>
+                <p>نام: <span>{{ product.title }}</span></p>
+                <p>
+                  نام انگلیسی: <span>{{ product.latin_name }}</span>
+                </p>
+                <p>وزن: <span>{{ product.weight }} گرم</span></p>
+                <p>نوع رست: <span>{{ product.roast_type }}</span></p>
+                <p>میزان کافئین: <span>{{ product.caffeine_content }}</span></p>
+                <p :class="product.stock_quantity > 0 ? 'text-success' : 'text-danger'" style="font-size: 13px">
+                  {{ product.stock_quantity > 0 ? "موجود در انبار" : "موجود نیست" }}
+                </p>
               </div>
               <!-- Social Media Icons -->
               <div id="social-links" class="mt-3">
@@ -53,44 +62,84 @@
             <div class="col-12 col-md-6 d-flex flex-column p-4">
               <div id="product-benefits">
                 <ul class="list-group">
-                  <li class="list-group-item disabled d-flex align-items-center" aria-disabled="true" style="background-color: #eeeeee;">
+                  <li
+                    class="list-group-item disabled d-flex align-items-center"
+                    aria-disabled="true"
+                    style="background-color: #eeeeee"
+                  >
                     <i class="fa-solid fa-shipping-fast me-1"></i>
                     پست پیشتاز ، تیپاکس و پیک موتوری
                   </li>
-                  <li class="list-group-item disabled d-flex align-items-center" aria-disabled="true" style="background-color: #eeeeee;">
+                  <li
+                    class="list-group-item disabled d-flex align-items-center"
+                    aria-disabled="true"
+                    style="background-color: #eeeeee"
+                  >
                     <i class="fa fa-tag me-1"></i>
                     تضمین بهترین قیمت بازار
                   </li>
-                  <li class="list-group-item disabled d-flex align-items-center" aria-disabled="true" style="background-color: #eeeeee;">
+                  <li
+                    class="list-group-item disabled d-flex align-items-center"
+                    aria-disabled="true"
+                    style="background-color: #eeeeee"
+                  >
                     <i class="fa-solid fa-headset me-1"></i>
                     پشتیبانی عالی
                   </li>
-                  <li class="list-group-item disabled d-flex align-items-center" aria-disabled="true" style="background-color: #eeeeee;">
+                  <li
+                    class="list-group-item disabled d-flex align-items-center"
+                    aria-disabled="true"
+                    style="background-color: #eeeeee"
+                  >
                     <i class="fa-solid fa-certificate me-1"></i>
                     اصالت کالاها از برترین برندها
                   </li>
-                  <li class="list-group-item disabled d-flex align-items-center" aria-disabled="true" style="background-color: #eeeeee;">
+                  <li
+                    class="list-group-item disabled d-flex align-items-center"
+                    aria-disabled="true"
+                    style="background-color: #eeeeee"
+                  >
                     <i class="fa-solid fa-bolt me-1"></i>
                     تحویل سریع در کمترین زمان ممکن
                   </li>
                 </ul>
               </div>
               <!-- Add to Cart Section -->
-              <div id="add-to-cart" class="row justify-content-between align-items-center mt-4">
+              <div
+                id="add-to-cart"
+                class="row justify-content-between align-items-center mt-4"
+              >
                 <!-- Add to Cart Button -->
                 <div class="col-12">
-                  <button class="btn btn-success w-100" type="button">افزودن به سبد خرید</button>
+                  <button class="btn btn-success w-100" type="button">
+                    افزودن به سبد خرید
+                  </button>
                 </div>
                 <!-- Quantity Control -->
                 <div class="col-12">
-                  <div id="quantity-control" class="d-flex align-items-center justify-content-between mt-3">
+                  <div
+                    id="quantity-control"
+                    class="d-flex align-items-center justify-content-between mt-3"
+                  >
                     <span>تعداد محصول: </span>
                     <div class="d-flex">
-                      <button class="btn border-0 d-flex justify-content-center align-items-center px-2" style="background-color: #eee;" @click="product_number--">
+                      <button
+                        class="btn border-0 d-flex justify-content-center align-items-center px-2"
+                        style="background-color: #eee"
+                        @click="product_number--"
+                      >
                         <i class="fa-solid fa-minus"></i>
                       </button>
-                      <span class="mx-2">{{ product_number < 1 ? product_number = 1 : product_number }}</span>
-                      <button class="btn border-0 d-flex justify-content-center align-items-center px-2" style="background-color: #eee;" @click="product_number++">
+                      <span class="mx-2">{{
+                        product_number < 1
+                          ? (product_number = 1)
+                          : product_number
+                      }}</span>
+                      <button
+                        class="btn border-0 d-flex justify-content-center align-items-center px-2"
+                        style="background-color: #eee"
+                        @click="product_number++"
+                      >
                         <i class="fa-solid fa-plus"></i>
                       </button>
                     </div>
@@ -106,32 +155,19 @@
 </template>
 
 <script setup>
-import axios from 'axios';
-import { onMounted, ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { computed, onMounted, ref } from "vue";
 
-const product_number = ref(1)
-const route = useRoute()
+import { useProductsStore } from "@/store/products";
+import { useRoute } from "vue-router";
+const productsStore = useProductsStore();
+const product = computed(() => productsStore.productDetail);
 
+const route = useRoute();
 onMounted(() => {
-  const productSlug = route.params.slug
-  axios
-    .get(`http://localhost:3000/api/product/${productSlug}`)
-    .then(function (response) {
-      // handle success
-      console.log(response.data)
-    })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-    })
-    .finally(function () {
-      // always executed
-    });
+  const productId = route.params.id
+  productsStore.setProductDetail(productId)
 })
 
+const product_number = ref(1);
 
 </script>
-
-<style>
-</style>

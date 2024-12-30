@@ -69,7 +69,7 @@
               >
                 <li
                   class="list-group-item"
-                  @click="categoryHandeler(category.slug)"
+                  @click=" productsStore.setProducts(category.slug)"
                 >
                   <a class="text-decoration-none text-dark"
                     >{{ category.name }}
@@ -104,6 +104,7 @@
               </ul>
             </div>
           </div>
+
           <!-- Products -->
           <div id="products" class="row g-2 align-items-stretch">
             <!-- Product Card -->
@@ -111,14 +112,14 @@
               class="col-lg-3 col-sm-6 col-12"
               v-for="product in products"
               :key="product.product_id"
-              @click="productCartHandeler(product.product_id)"
             >
               <router-link
                 :to="{
                   name: 'product-information',
-                  params: { slug: product.slug },
+                  params: { id: product.product_id },
                 }"
                 class="text-decoration-none"
+                @click="productsStore.setProductDetail(product.product_id)"
               >
                 <div class="card p-3 rounded-3 h-100 d-flex flex-column">
                   <img
@@ -149,54 +150,22 @@
 
 <script setup>
 const axios = require("axios");
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
-const products = ref(null);
 const productCategories = ref(null);
-
 const route = useRoute();
 
+
+import { useProductsStore } from "@/store/products";
+const productsStore = useProductsStore();
+const products = computed(() => productsStore.products);
 onMounted(() => {
-  const categorySlug = route.query.category;
-  if (categorySlug) {
-    categoryHandeler(categorySlug);
-  } else {
-    categoryHandeler();
-  }
   loadCategories();
+  const category = route.query.category || null;
+  productsStore.setProducts(category);
 });
 
-// function loadProducts() {
-//   axios
-//     .get("http://localhost:3000/api/products")
-//     .then(function (response) {
-//       // handle success
-//       products.value = response.data;
-//     })
-//     .catch(function (error) {
-//       // handle error
-//       console.log(error);
-//     })
-//     .finally(function () {
-//       // always executed
-//     });
-// }
 
-function categoryHandeler(categorySlug) {
-  axios
-    .get(`http://localhost:3000/api/products?category=${categorySlug}`)
-    .then(function (response) {
-      // handle success
-      products.value = response.data;
-    })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-    })
-    .finally(function () {
-      // always executed
-    });
-}
 
 function loadCategories() {
   axios
@@ -213,4 +182,5 @@ function loadCategories() {
       // always executed
     });
 }
+
 </script>

@@ -12,12 +12,11 @@ app.use(bodyParser.json());
 
 app.get("/api/products", (req, res) => {
   let q = "select * from products";
-
   const { category } = req.query;
-  console.log(category);
-  if (category) {
+  if (category && category != "null") {
     q += ` WHERE products.category_id = (SELECT categories.category_id FROM categories WHERE categories.slug = '${category}')`;
   }
+  console.log(q);
   db.query(q, (err, result) => {
     if (err) {
       return res
@@ -29,17 +28,13 @@ app.get("/api/products", (req, res) => {
 });
 
 app.get("/api/product/:id", (req, res) => {
-  db.query(
-    `
-    SELECT * FROM products WHERE products.product_id = ${parseInt(
-      req.params.id
-    )}
-    `,
+  const q = ` SELECT * FROM products WHERE products.product_id = ${parseInt(req.params.id)}`;
+  db.query( q ,
     (err, product) => {
       if (err) {
         return res
           .status(500)
-          .json({ message: "Error fetching products", error: err });
+          .json({ message: "Error fetching product", error: err });
       }
       res.json(product);
     }
