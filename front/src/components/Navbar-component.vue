@@ -82,7 +82,6 @@
     tabindex="-1"
     role="dialog"
     aria-labelledby="loginRegisterModal"
-    aria-hidden="true"
     style="background-color: rgba(0, 0, 0, 0.5)"
   >
     <div class="modal-dialog modal-dialog-centered">
@@ -146,7 +145,6 @@
     tabindex="-1"
     role="dialog"
     aria-labelledby="loginRegisterModal"
-    aria-hidden="true"
     style="background-color: rgba(0, 0, 0, 0.5)"
   >
     <div class="modal-dialog modal-dialog-centered">

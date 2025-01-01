@@ -111,7 +111,7 @@
               >
                 <!-- Add to Cart Button -->
                 <div class="col-12">
-                  <button class="btn btn-success w-100" type="button">
+                  <button class="btn btn-success w-100" type="button" @click="addToCart">
                     افزودن به سبد خرید
                   </button>
                 </div>
@@ -158,16 +158,22 @@
 import { computed, onMounted, ref } from "vue";
 
 import { useProductsStore } from "@/store/products";
+
 import { useRoute } from "vue-router";
 const productsStore = useProductsStore();
 const product = computed(() => productsStore.productDetail);
-
 const route = useRoute();
+const productId = route.params.id
+
 onMounted(() => {
-  const productId = route.params.id
   productsStore.setProductDetail(productId)
 })
 
 const product_number = ref(1);
+
+
+function addToCart (){
+
+}
 
 </script>
