@@ -7,7 +7,6 @@ const db = mysql.createConnection({
     database: 'coffeeshop' 
 });
 
-// اتصال به دیتابیس
 db.connect((err) => {
     if (err) {
         console.error('Error connecting to database.', err.message);

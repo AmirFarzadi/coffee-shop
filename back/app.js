@@ -1,44 +1,44 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-const db = require("./db");
-const { body, validationResult } = require("express-validator");
+// const express = require("express");
+// const bodyParser = require("body-parser");
+// const cors = require("cors");
+// const db = require("./db");
+// const { body, validationResult } = require("express-validator");
 
-const app = express();
-app.use(express.json());
+// const app = express();
+// app.use(express.json());
 
-app.use(cors());
-app.use(bodyParser.json());
+// app.use(cors());
+// app.use(bodyParser.json());
 
-app.get("/api/products", (req, res) => {
-  let q = "select * from products";
-  const { category } = req.query;
-  if (category && category != "null") {
-    q += ` WHERE products.category_id = (SELECT categories.category_id FROM categories WHERE categories.slug = '${category}')`;
-  }
-  db.query(q, (err, result) => {
-    if (err) {
-      return res
-        .status(500)
-        .json({ message: "Error fetching products", error: err });
-    }
-    res.json(result);
-  });
-});
+// app.get("/api/products", (req, res) => {
+//   let q = "select * from products";
+//   const { category } = req.query;
+//   if (category && category != "null") {
+//     q += ` WHERE products.category_id = (SELECT categories.category_id FROM categories WHERE categories.slug = '${category}')`;
+//   }
+//   db.query(q, (err, result) => {
+//     if (err) {
+//       return res
+//         .status(500)
+//         .json({ message: "Error fetching products", error: err });
+//     }
+//     res.json(result);
+//   });
+// });
 
-app.get("/api/product/:id", (req, res) => {
-  const q = ` SELECT * FROM products WHERE products.product_id = ${parseInt(req.params.id)}`;
-  db.query( q ,
-    (err, product) => {
-      if (err) {
-        return res
-          .status(500)
-          .json({ message: "Error fetching product", error: err });
-      }
-      res.json(product);
-    }
-  );
-});
+// app.get("/api/product/:id", (req, res) => {
+//   const q = ` SELECT * FROM products WHERE products.product_id = ${parseInt(req.params.id)}`;
+//   db.query( q ,
+//     (err, product) => {
+//       if (err) {
+//         return res
+//           .status(500)
+//           .json({ message: "Error fetching product", error: err });
+//       }
+//       res.json(product);
+//     }
+//   );
+// });
 
 // app.get("/api/category", (req, res) => {
 //   db.query(
@@ -56,16 +56,16 @@ app.get("/api/product/:id", (req, res) => {
 //   );
 // });
 
-app.get("/api/categories", (req, res) => {
-  db.query("select * from categories", (err, result) => {
-    if (err) {
-      return res
-        .status(500)
-        .json({ message: "Error fetching products", error: err });
-    }
-    res.json(result);
-  });
-});
+// app.get("/api/categories", (req, res) => {
+//   db.query("select * from categories", (err, result) => {
+//     if (err) {
+//       return res
+//         .status(500)
+//         .json({ message: "Error fetching products", error: err });
+//     }
+//     res.json(result);
+//   });
+// });
 
 // app.post("/api/products", [
 //   body("email", "email most be valid").isEmail(),
@@ -79,4 +79,4 @@ app.get("/api/categories", (req, res) => {
 // }
 // );
 
-module.exports = app;
+// module.exports = app;

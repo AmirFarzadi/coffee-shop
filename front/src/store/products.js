@@ -1,27 +1,32 @@
-import axios from "axios";
 import { defineStore } from "pinia";
+import apiClient from "@/services/apiClient";
 
 export const useProductsStore = defineStore("products", {
   state: () => ({
     products: [],
-    productDetail : {}
+    productDetail: {},
+    error: null,
+    loading: false,
   }),
   actions: {
-    async setProducts(category) {
+    async getProducts(category) {
+      this.loading = true;
       try {
-        const response = await axios.get(
-          `http://localhost:3000/api/products?category=${category}`
+        const response = await apiClient.get(
+          `/products?category=${category}`
         );
         this.products = response.data;
       } catch (error) {
-        console.log(error);
+        this.error = error.message;
+      } finally {
+        this.loading = false;
       }
     },
 
-    async setProductDetail(productId) {
+    async getProductDetail(productId) {
       try {
-        const response = await axios.get(
-          `http://localhost:3000/api/product/${productId}`
+        const response = await apiClient.get(
+          `/products/${productId}`
         );
         this.productDetail = response.data[0];
       } catch (error) {

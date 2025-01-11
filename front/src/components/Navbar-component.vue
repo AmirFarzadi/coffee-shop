@@ -29,7 +29,7 @@
         <router-link
           :to="{ name: 'products' }"
           class="nav-link"
-          @click="productsStore.setProducts(null)"
+          @click="productsStore.getProducts(null)"
         >
           <li class="nav-item mx-2">محصولات</li>
         </router-link>

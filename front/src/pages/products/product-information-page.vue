@@ -166,7 +166,7 @@ const route = useRoute();
 const productId = route.params.id
 
 onMounted(() => {
-  productsStore.setProductDetail(productId)
+  productsStore.getProductDetail(productId)
 })
 
 const product_number = ref(1);

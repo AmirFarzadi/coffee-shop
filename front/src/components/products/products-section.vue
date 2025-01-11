@@ -60,8 +60,8 @@
             <h5 class="mb-3">دسته بندی محصولات</h5>
             <ul
               class="list-group"
-              v-for="category in productCategories"
-              :key="category.category_id"
+              v-for="(category, index) in productCategories"
+              :key="index"
             >
               <router-link
                 :to="{ name: 'products', query: { category: category.slug } }"
@@ -69,7 +69,7 @@
               >
                 <li
                   class="list-group-item"
-                  @click=" productsStore.setProducts(category.slug)"
+                  @click=" productsStore.getProducts(category.slug)"
                 >
                   <a class="text-decoration-none text-dark"
                     >{{ category.name }}
@@ -119,7 +119,7 @@
                   params: { id: product.product_id },
                 }"
                 class="text-decoration-none"
-                @click="productsStore.setProductDetail(product.product_id)"
+                @click="productsStore.getProductDetail(product.product_id)"
               >
                 <div class="card p-3 rounded-3 h-100 d-flex flex-column">
                   <img
@@ -162,7 +162,7 @@ const products = computed(() => productsStore.products);
 onMounted(() => {
   loadCategories();
   const category = route.query.category || null;
-  productsStore.setProducts(category);
+  productsStore.getProducts(category);
 });
 
 
@@ -171,7 +171,6 @@ function loadCategories() {
   axios
     .get("http://localhost:3000/api/categories")
     .then(function (response) {
-      // handle success
       productCategories.value = response.data;
     })
     .catch(function (error) {
