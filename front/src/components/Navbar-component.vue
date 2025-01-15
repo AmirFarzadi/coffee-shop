@@ -9,7 +9,7 @@
     </button>
     <router-link :to="{ name: 'home' }" class="navbar-brand ms-3">
       <img
-        src="../img/logo.png"
+        src="@/assets/images/blog.jpg"
         alt="Logo"
         class="img-fluid"
         style="width: 50px"
@@ -64,9 +64,11 @@
       </form>
 
       <div class="ms-lg-3 my-2 my-lg-0">
-        <button class="btn btn-success mx-2">
-          <i class="fa-solid fa-cart-shopping"></i>
-        </button>
+        <router-link to="cart">
+          <button class="btn btn-success mx-2">
+            <i class="fa-solid fa-cart-shopping"></i>
+          </button>
+        </router-link>
         <button @click="toggleModal('login')" class="btn btn-outline-success">
           <i class="fa-solid fa-user-plus"></i>
           ثبت نام / ورود

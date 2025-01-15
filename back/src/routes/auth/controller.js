@@ -3,9 +3,9 @@ const db = require("../../../config/database");
 
 module.exports = new (class extends controller {
   register(req, res) {
-    const { name, email, password } = req.body;
+    const { firstName , lastName , email, password , phone } = req.body;
 
-    if (!name || !email || !password) {
+    if (!firstName || !lastName || !email || !password || !phone) {
       return res.status(400).json({ message: "All fields are required." });
     }
 
@@ -24,7 +24,7 @@ module.exports = new (class extends controller {
       }
 
       const insertQuery = `INSERT INTO users (name, email, password) VALUES (?, ?, ?)`;
-      db.query(insertQuery, [name, email, password], (err, result) => {
+      db.query(insertQuery, [firstName,lastName, email, password, phone], (err, result) => {
         if (err) {
           debug("Error creating user:", err.message);
           return res

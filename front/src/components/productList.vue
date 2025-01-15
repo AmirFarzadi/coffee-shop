@@ -115,7 +115,7 @@
             >
               <router-link
                 :to="{
-                  name: 'product-information',
+                  name: 'productDetails',
                   params: { id: product.product_id },
                 }"
                 class="text-decoration-none"
@@ -123,7 +123,7 @@
               >
                 <div class="card p-3 rounded-3 h-100 d-flex flex-column">
                   <img
-                    src="../../img/coffee.jpg"
+                    src="@/assets/images/coffee.jpg"
                     class="card-img-top mb-3 object-fit-cover"
                     alt=""
                   />
@@ -149,7 +149,6 @@
 </template>
 
 <script setup>
-const axios = require("axios");
 import { computed, onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
 const productCategories = ref(null);
@@ -157,6 +156,7 @@ const route = useRoute();
 
 
 import { useProductsStore } from "@/store/products";
+import apiClient from "@/services/apiClient";
 const productsStore = useProductsStore();
 const products = computed(() => productsStore.products);
 onMounted(() => {
@@ -168,8 +168,8 @@ onMounted(() => {
 
 
 function loadCategories() {
-  axios
-    .get("http://localhost:3000/api/categories")
+  apiClient
+    .get("/categories")
     .then(function (response) {
       productCategories.value = response.data;
     })

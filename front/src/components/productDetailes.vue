@@ -9,7 +9,7 @@
         >
           <div id="product-image">
             <img
-              src="../../img/coffee.jpg"
+              src="@/assets/images/coffee.jpg"
               alt="Coffee"
               class="img-fluid border"
             />
@@ -158,8 +158,8 @@
 import { computed, onMounted, ref } from "vue";
 
 import { useProductsStore } from "@/store/products";
-
 import { useRoute } from "vue-router";
+import apiClient from "@/services/apiClient";
 const productsStore = useProductsStore();
 const product = computed(() => productsStore.productDetail);
 const route = useRoute();
@@ -173,7 +173,20 @@ const product_number = ref(1);
 
 
 function addToCart (){
-
+  console.log(product.value.product_id);
+  
+  apiClient.post("/add")
+  .then(function (response) {
+    // handle success
+    console.log(response);
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+  .finally(function () {
+    // always executed
+  });
 }
 
 </script>

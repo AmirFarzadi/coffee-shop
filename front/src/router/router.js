@@ -1,49 +1,47 @@
-import BlogSection from "@/components/blog/blog-section.vue";
-import ProductsSection from "@/components/products/products-section.vue";
-import BlogDetails from "@/pages/blog/blog-details.vue";
 import BlogPage from "@/pages/blog/blogs-component.vue";
-import HomePage from "@/pages/home/home-page.vue";
-import ProductInformationPage from "@/pages/products/product-information-page.vue";
-import ProductsPage from "@/pages/products/products-page.vue";
+import ShoppingCart from "../pages/cart/Shopping-Cart-page.vue";
 import { createRouter, createWebHistory } from "vue-router";
+import ProductList from "@/components/productList.vue";
+import ProductDetailes from "@/components/productDetailes.vue";
+import App from "@/App.vue";
+import ArticleDetailes from "@/components/articleDetailes.vue";
+import ArticlesPage from "@/components/articlesPage.vue";
 
 const routes = [
   {
     path: "/",
     name: "home",
-    component: HomePage,
+    component: App,
   },
   {
     path: "/products",
-    component: ProductsPage,
-    children: [
-      {
-        path: "", // مسیر پیش‌فرض فرزند
-        name: "products",
-        component: ProductsSection,
-      },
-    ],
+    component: ProductList,
   },
   {
     path: "/product/:id",
-    name: "product-information",
-    component: ProductInformationPage,
+    name: "productDetails",
+    component: ProductDetailes,
   },
   {
     path: "/blog",
     component: BlogPage,
     children: [
       {
-        path: "", // مسیر پیش‌فرض فرزند
+        path: "",
         name: "blogs",
-        component: BlogSection,
+        component: ArticlesPage,
       },
       {
-        path: ":id", // مسیر پویا برای جزئیات وبلاگ
+        path: ":id",
         name: "blog-details",
-        component: BlogDetails,
+        component: ArticleDetailes,
       },
     ],
+  },
+  {
+    path: "/cart",
+    name: "cart",
+    component: ShoppingCart,
   },
 ];
 

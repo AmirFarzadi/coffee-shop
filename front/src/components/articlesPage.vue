@@ -27,7 +27,7 @@
           <router-link :to="{name : 'blog-details' , params: {id : blog.id}}" class="text-decoration-none">
             <div class="card h-100 d-flex flex-column" style="width: 15rem">
               <img
-                src="../../img/blog.jpg"
+                src="@/assets/images/blog.jpg"
                 class="card-img-top object-fit-cover"
                 alt="..."
                 height="200px"
@@ -49,6 +49,6 @@
 
 
 <script setup>
-import blogs from '../../blog-data.js';
+import blogs from '../blog-data.js';
 console.log(blogs);
 </script>
